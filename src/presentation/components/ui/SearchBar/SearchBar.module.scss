@@ -1,0 +1,23 @@
+.container {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+}
+
+.input {
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-light);
+  color: var(--color-black);
+  border-bottom: var(--border-width) solid var(--border-color);
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-gray-500);
+    font-weight: var(--font-weight-light);
+  }
+
+  &:focus {
+    border-bottom-color: var(--color-black);
+  }
+}

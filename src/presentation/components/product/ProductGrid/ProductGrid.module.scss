@@ -1,0 +1,29 @@
+@use '@/styles/mixins' as *;
+
+.container {
+  @include content-container;
+  padding-top: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width) solid var(--border-color);
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.empty {
+  @include content-container;
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-md);
+}

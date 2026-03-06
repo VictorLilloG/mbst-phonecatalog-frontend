@@ -1,0 +1,12 @@
+.container {
+  padding-top: var(--spacing-xs);
+  padding-bottom: var(--spacing-lg);
+}
+
+.text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-black);
+}
