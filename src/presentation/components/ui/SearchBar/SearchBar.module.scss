@@ -1,4 +1,7 @@
 .container {
+  position: relative;
+  display: flex;
+  align-items: center;
   padding-top: var(--spacing-lg);
   padding-bottom: var(--spacing-md);
 }
@@ -6,18 +9,33 @@
 .input {
   width: 100%;
   padding: var(--spacing-sm) 0;
+  padding-right: var(--spacing-lg);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-light);
   color: var(--color-black);
   border-bottom: var(--border-width) solid var(--border-color);
-  transition: border-color 0.2s ease;
+  transition: border-color var(--transition-base);
 
   &::placeholder {
-    color: var(--color-gray-500);
+    color: var(--color-placeholder);
     font-weight: var(--font-weight-light);
   }
 
   &:focus {
     border-bottom-color: var(--color-black);
   }
+}
+
+.clearButton {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  background: none;
+  border: none;
 }

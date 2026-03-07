@@ -8,6 +8,7 @@
   --color-gray-500: #999999;
   --color-gray-700: #666666;
   --color-gray-900: #333333;
+  --color-placeholder: #aaaaaa;
 
   // -- Typography --
   --font-family-base: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
@@ -38,6 +39,10 @@
   // -- Borders --
   --border-color: #000000;
   --border-width: 0.5px;
+
+  // -- Transitions / Animations --
+  --transition-base: 0.2s ease;
+  --animation-slide-distance: 20px;
 
   // -- Responsive padding --
   @media (min-width: 768px) {

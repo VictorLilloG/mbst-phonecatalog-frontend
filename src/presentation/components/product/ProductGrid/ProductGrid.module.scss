@@ -2,25 +2,68 @@
 
 .container {
   @include content-container;
+  position: relative;
   padding-top: 48px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  border-top: var(--border-width) solid var(--border-color);
-  border-left: var(--border-width) solid var(--border-color);
 
+  // -- Mobile (1 column) --
   > * {
     height: 100%;
+    border-right: var(--border-width) solid var(--border-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+    border-left: var(--border-width) solid var(--border-color);
+
+    &:first-child {
+      border-top: var(--border-width) solid var(--border-color);
+    }
   }
 
+  // -- Tablet (2 columns) --
   @include tablet {
     grid-template-columns: repeat(2, 1fr);
+
+    > * {
+      border-left: none;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &:nth-child(-n + 2) {
+        border-top: var(--border-width) solid var(--border-color);
+      }
+
+      &:nth-child(2n + 1) {
+        border-left: var(--border-width) solid var(--border-color);
+      }
+    }
   }
 
+  // -- Desktop (5 columns) --
   @include desktop {
     grid-template-columns: repeat(5, 1fr);
+
+    > * {
+      &:nth-child(-n + 2) {
+        border-top: none;
+      }
+
+      &:nth-child(2n + 1) {
+        border-left: none;
+      }
+
+      &:nth-child(-n + 5) {
+        border-top: var(--border-width) solid var(--border-color);
+      }
+
+      &:nth-child(5n + 1) {
+        border-left: var(--border-width) solid var(--border-color);
+      }
+    }
   }
 }
 
