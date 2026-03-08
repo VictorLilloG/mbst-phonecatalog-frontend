@@ -3,7 +3,8 @@
  * The API returns image URLs with http:// protocol,
  * but Next.js Image requires https:// for remote patterns.
  */
-export function ensureHttps(url: string): string {
+export function ensureHttps(url: string | undefined): string {
+  if (!url) return '';
   return url.replace(/^http:\/\//, 'https://');
 }
 

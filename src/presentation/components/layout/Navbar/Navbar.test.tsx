@@ -18,9 +18,9 @@ jest.mock('next/link', () => ({
 }));
 
 describe('Navbar', () => {
-  it('renders the MBST logo text', () => {
+  it('renders the MBST logo', () => {
     render(<Navbar />);
-    expect(screen.getByText('MBST')).toBeInTheDocument();
+    expect(screen.getByAltText('MBST')).toBeInTheDocument();
   });
 
   it('renders the home link', () => {

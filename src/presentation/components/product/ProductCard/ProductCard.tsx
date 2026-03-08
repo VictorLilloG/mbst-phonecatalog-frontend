@@ -23,8 +23,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <Image
           src={ensureHttps(product.imageUrl)}
           alt={`${product.brand} ${product.name}`}
-          fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw"
+          width={200}
+          height={200}
           className={styles.image}
         />
       </div>

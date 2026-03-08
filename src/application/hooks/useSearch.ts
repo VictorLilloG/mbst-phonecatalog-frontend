@@ -1,15 +1,43 @@
 'use client';
 
-/**
- * Hook for search functionality.
- * Skeleton: to be implemented in the search feature phase.
- */
-export function useSearch() {
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const DEBOUNCE_MS = 1000;
+
+interface UseSearchResult {
+  query: string;
+  setQuery: (q: string) => void;
+  debouncedQuery: string;
+}
+
+export function useSearch(): UseSearchResult {
+  const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, DEBOUNCE_MS);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [query]);
+
+  const handleSetQuery = useCallback((q: string) => {
+    setQuery(q);
+  }, []);
+
   return {
-    query: '',
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setQuery: (_q: string) => {},
-    debouncedQuery: '',
-    isSearching: false,
+    query,
+    setQuery: handleSetQuery,
+    debouncedQuery,
   };
 }
