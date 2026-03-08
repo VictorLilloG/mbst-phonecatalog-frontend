@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { SimilarProducts } from './SimilarProducts';
 import type { ProductSummary } from '@/domain/models/Product';
 
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ fill, ...props }: any) => {
+  default: ({ ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-fill={fill} {...props} />;
+    return <img {...props} />;
   },
 }));
 
@@ -69,5 +69,56 @@ describe('SimilarProducts', () => {
   it('renders the scroll indicator bar', () => {
     const { container } = render(<SimilarProducts products={similarProducts} />);
     expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+  });
+
+  it('sets grabbing cursor on mousedown with primary button', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    const slider = screen.getByTestId('similar-slider');
+    fireEvent.mouseDown(slider, { button: 0, clientX: 100 });
+    expect(document.body.style.cursor).toBe('grabbing');
+  });
+
+  it('ignores non-primary mouse buttons on mousedown', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    const slider = screen.getByTestId('similar-slider');
+    fireEvent.mouseDown(slider, { button: 2, clientX: 100 });
+    expect(document.body.style.cursor).not.toBe('grabbing');
+  });
+
+  it('resets cursor on mouseup after drag start', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    const slider = screen.getByTestId('similar-slider');
+    fireEvent.mouseDown(slider, { button: 0, clientX: 100 });
+    fireEvent.mouseUp(window);
+    expect(document.body.style.cursor).toBe('');
+  });
+
+  it('mouseup is a no-op when drag was not started', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    // No mousedown before mouseup — should not throw
+    fireEvent.mouseUp(window);
+    expect(document.body.style.cursor).toBe('');
+  });
+
+  it('prevents link click after a drag move greater than 3px', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    const slider = screen.getByTestId('similar-slider');
+    fireEvent.mouseDown(slider, { button: 0, clientX: 0 });
+    fireEvent.mouseMove(window, { clientX: 50 });
+    const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+    const preventSpy = jest.spyOn(clickEvent, 'preventDefault');
+    slider.dispatchEvent(clickEvent);
+    expect(preventSpy).toHaveBeenCalled();
+  });
+
+  it('does not prevent click when drag moved less than 3px', () => {
+    render(<SimilarProducts products={similarProducts} />);
+    const slider = screen.getByTestId('similar-slider');
+    fireEvent.mouseDown(slider, { button: 0, clientX: 0 });
+    fireEvent.mouseMove(window, { clientX: 2 });
+    const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+    const preventSpy = jest.spyOn(clickEvent, 'preventDefault');
+    slider.dispatchEvent(clickEvent);
+    expect(preventSpy).not.toHaveBeenCalled();
   });
 });

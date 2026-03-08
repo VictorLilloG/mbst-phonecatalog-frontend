@@ -5,9 +5,9 @@ import type { ProductSummary } from '@/domain/models/Product';
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ fill, ...props }: any) => {
+  default: ({ ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-fill={fill} {...props} />;
+    return <img {...props} />;
   },
 }));
 
@@ -69,9 +69,9 @@ describe('ProductCard', () => {
     expect(link).toBeInTheDocument();
   });
 
-  it('rounds decimal prices', () => {
+  it('formats decimal prices with comma and 2 decimal places', () => {
     const decimalProduct = { ...mockProduct, basePrice: 553.31 };
     render(<ProductCard product={decimalProduct} />);
-    expect(screen.getByText('553 EUR')).toBeInTheDocument();
+    expect(screen.getByText('553,31 EUR')).toBeInTheDocument();
   });
 });
