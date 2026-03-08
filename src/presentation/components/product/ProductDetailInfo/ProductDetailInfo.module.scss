@@ -5,8 +5,8 @@
   max-width: calc(1200px + 2 * var(--page-padding-x));
   display: flex;
   flex-direction: column;
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-2xl);
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
 
   @include tablet {
     flex-direction: row;
@@ -27,28 +27,18 @@
   }
 }
 
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-
-  @include tablet {
-    width: 320px;
-  }
-
-  @include desktop {
-    width: 380px;
-  }
-}
-
 .image {
+  width: auto;
+  height: auto;
+  max-width: 500px;
+  max-height: 500px;
   object-fit: contain;
 }
 
 .infoSection {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: var(--spacing-3xl);
   padding: var(--spacing-md) 0;
 
   @include tablet {
@@ -87,28 +77,30 @@
 }
 
 .addButton {
-  width: 100%;
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-size: var(--font-size-base);
+  width: 260px;
+  height: 48px;
+  padding: 5px 7px;
+  font-size: var(--font-size-sm);
   font-family: var(--font-family-base);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.1em;
+  font-weight: var(--font-weight-light);
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-align: center;
   text-transform: uppercase;
   border: none;
-  background-color: var(--color-black);
-  color: var(--color-white);
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
   cursor: pointer;
-  transition:
-    opacity var(--transition-base),
-    background-color var(--transition-base);
+  transition: background-color var(--transition-base);
 
   &:disabled {
-    opacity: 0.3;
+    background-color: var(--btn-disabled-bg);
+    color: var(--btn-disabled-color);
     cursor: not-allowed;
   }
 
   &:hover:not(:disabled) {
-    background-color: var(--color-gray-700);
+    background-color: var(--color-gray-900);
   }
 
   &:focus-visible {

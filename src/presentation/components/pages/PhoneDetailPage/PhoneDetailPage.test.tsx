@@ -6,9 +6,9 @@ import type { ProductDetail } from '@/domain/models/Product';
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ fill, priority, ...props }: any) => {
+  default: ({ priority, ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-fill={fill} data-priority={priority} {...props} />;
+    return <img data-priority={priority} {...props} />;
   },
 }));
 
@@ -78,7 +78,7 @@ describe('PhoneDetailPage', () => {
 
   it('renders the base price initially', () => {
     render(<PhoneDetailPage product={mockProduct} />);
-    expect(screen.getByText('FROM 269 EUR')).toBeInTheDocument();
+    expect(screen.getByText('From 269 EUR')).toBeInTheDocument();
   });
 
   it('renders specifications section', () => {

@@ -35,16 +35,14 @@ export function ProductDetailInfo({
   return (
     <section className={styles.container} aria-label="Product details">
       <div className={styles.imageSection}>
-        <div className={styles.imageWrapper}>
-          <Image
+        <Image
             src={ensureHttps(currentImageUrl)}
             alt={`${product.brand} ${product.name}`}
-            fill
-            sizes="(max-width: 767px) 100vw, 50vw"
+            width={500}
+            height={500}
             className={styles.image}
             priority
           />
-        </div>
       </div>
 
       <div className={styles.infoSection}>

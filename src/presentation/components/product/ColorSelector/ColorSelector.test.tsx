@@ -46,4 +46,16 @@ describe('ColorSelector', () => {
     render(<ColorSelector colors={colors} selectedColor={null} onSelect={jest.fn()} />);
     expect(screen.getByRole('radiogroup', { name: /color options/i })).toBeInTheDocument();
   });
+
+  it('displays the selected color name', () => {
+    render(<ColorSelector colors={colors} selectedColor={colors[0]} onSelect={jest.fn()} />);
+    expect(screen.getByText('Red')).toBeInTheDocument();
+  });
+
+  it('shows a placeholder when no color is selected', () => {
+    const { container } = render(<ColorSelector colors={colors} selectedColor={null} onSelect={jest.fn()} />);
+    const colorName = container.querySelector('[class*="colorName"]');
+    expect(colorName).toBeInTheDocument();
+    expect(colorName?.textContent).toBe('\u00A0');
+  });
 });

@@ -7,10 +7,8 @@
 }
 
 .contentWrapper {
+  @include content-container;
   max-width: calc(1200px + 2 * var(--page-padding-x));
-  margin: 0 auto;
-  padding-left: var(--page-padding-x);
-  padding-right: var(--page-padding-x);
 }
 
 .title {

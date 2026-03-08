@@ -6,9 +6,9 @@ import type { ProductDetail, ColorOption, StorageOption } from '@/domain/models/
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ fill, priority, ...props }: any) => {
+  default: ({ priority, ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-fill={fill} data-priority={priority} {...props} />;
+    return <img data-priority={priority} {...props} />;
   },
 }));
 
@@ -61,12 +61,12 @@ describe('ProductDetailInfo', () => {
 
   it('renders the current price', () => {
     render(<ProductDetailInfo {...defaultProps} />);
-    expect(screen.getByText('FROM 499 EUR')).toBeInTheDocument();
+    expect(screen.getByText('From 499 EUR')).toBeInTheDocument();
   });
 
   it('renders a different price when storage is selected', () => {
     render(<ProductDetailInfo {...defaultProps} currentPrice={599} />);
-    expect(screen.getByText('FROM 599 EUR')).toBeInTheDocument();
+    expect(screen.getByText('From 599 EUR')).toBeInTheDocument();
   });
 
   it('renders the product image', () => {
