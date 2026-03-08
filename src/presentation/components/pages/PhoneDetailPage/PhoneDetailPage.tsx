@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import type { ProductDetail } from '@/domain/models/Product';
 import { useProductDetail } from '@/application/hooks/useProductDetail';
@@ -37,7 +38,14 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
     <>
       <Navbar>
         <Link href="/" className={styles.backLink}>
-          &#8249; BACK
+          <Image
+            src="/back-icon.svg"
+            alt=""
+            width={20}
+            height={20}
+            aria-hidden="true"
+          />
+          <span>BACK</span>
         </Link>
       </Navbar>
       <PageLayout>

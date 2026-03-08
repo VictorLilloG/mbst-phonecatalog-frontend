@@ -18,7 +18,7 @@
 .imageSection {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   padding: var(--spacing-xl) 0;
 
   @include tablet {
@@ -30,9 +30,19 @@
 .image {
   width: auto;
   height: auto;
-  max-width: 500px;
-  max-height: 500px;
+  max-width: 17.1875rem;
+  max-height: 17.1875rem;
   object-fit: contain;
+
+  @include tablet {
+    max-width: 25.9375rem;
+    max-height: 25.9375rem;
+  }
+
+  @include desktop {
+    max-width: 31.25rem;
+    max-height: 31.25rem;
+  }
 }
 
 .infoSection {
@@ -77,7 +87,7 @@
 }
 
 .addButton {
-  width: 260px;
+  width: 100%;
   height: 48px;
   padding: 5px 7px;
   font-size: var(--font-size-sm);
@@ -105,5 +115,9 @@
 
   &:focus-visible {
     @include focus-outline;
+  }
+
+  @include tablet {
+    width: 260px;
   }
 }

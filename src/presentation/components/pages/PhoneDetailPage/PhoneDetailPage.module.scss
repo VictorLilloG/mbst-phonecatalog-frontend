@@ -1,11 +1,24 @@
 .backLink {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-light);
-  color: var(--color-black);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
-  letter-spacing: 0.05em;
+  color: var(--color-black);
 
-  &:hover {
-    text-decoration: underline;
+  img {
+    display: block;
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  span {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-light);
+    line-height: 1cap;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    transform: translateY(0.5px);
   }
 }
