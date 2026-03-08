@@ -64,9 +64,21 @@ describe('ProductDetailInfo', () => {
     expect(screen.getByText('From 499 EUR')).toBeInTheDocument();
   });
 
-  it('renders a different price when storage is selected', () => {
-    render(<ProductDetailInfo {...defaultProps} currentPrice={599} />);
-    expect(screen.getByText('From 599 EUR')).toBeInTheDocument();
+  it('shows price without "From" when storage is selected', () => {
+    render(
+      <ProductDetailInfo
+        {...defaultProps}
+        currentPrice={599}
+        selectedStorage={mockProduct.storageOptions[1]}
+      />,
+    );
+    expect(screen.getByText('599 EUR')).toBeInTheDocument();
+    expect(screen.queryByText(/From/)).not.toBeInTheDocument();
+  });
+
+  it('shows price with "From" when no storage is selected', () => {
+    render(<ProductDetailInfo {...defaultProps} currentPrice={499} selectedStorage={null} />);
+    expect(screen.getByText('From 499 EUR')).toBeInTheDocument();
   });
 
   it('renders the product image', () => {

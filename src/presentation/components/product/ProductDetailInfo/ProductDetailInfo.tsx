@@ -48,7 +48,7 @@ export function ProductDetailInfo({
       <div className={styles.infoSection}>
         <div className={styles.header}>
           <h1 className={styles.name}>{product.name.toUpperCase()}</h1>
-          <span className={styles.price}>From {formatPrice(currentPrice)}</span>
+          <span className={styles.price}>{selectedStorage ? '' : 'From '}{formatPrice(currentPrice)}</span>
         </div>
 
         <div className={styles.selectors}>
