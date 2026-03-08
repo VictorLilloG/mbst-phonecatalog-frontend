@@ -5,7 +5,7 @@
   isolation: isolate;
   overflow: hidden;
   height: 100%;
-  padding: var(--spacing-md);
+  padding: var(--spacing-2md) var(--spacing-md);
   gap: var(--spacing-lg);
   cursor: pointer;
 
@@ -39,16 +39,18 @@
 }
 
 .imageContainer {
-  position: relative;
   z-index: 1;
-  width: 100%;
-  aspect-ratio: 5 / 4;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 250px;
 }
 
 .image {
+  width: auto;
+  height: auto;
+  max-width: 250px;
+  max-height: 200px;
   object-fit: contain;
 }
 
@@ -62,9 +64,12 @@
 }
 
 .brand {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
-  letter-spacing: 0.05em;
+  font-size: 10px;
+  font-weight: var(--font-weight-light);
+  line-height: 100%;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #79736D;
   transition: color 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -76,9 +81,11 @@
 }
 
 .name {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: var(--font-weight-light);
+  line-height: 100%;
+  letter-spacing: 0;
+  text-transform: uppercase;
   transition: color 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -87,7 +94,11 @@
 }
 
 .price {
-  font-size: var(--font-size-sm);
+  font-size: 12px;
+  font-weight: var(--font-weight-light);
+  line-height: 100%;
+  letter-spacing: 0;
+  text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 0;
   transition: color 0.45s cubic-bezier(0.4, 0, 0.2, 1);
