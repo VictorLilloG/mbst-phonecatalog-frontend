@@ -15,7 +15,7 @@ interface PhoneListPageProps {
 }
 
 export function PhoneListPage({ initialProducts }: PhoneListPageProps) {
-  const { query, setQuery, debouncedQuery } = useSearch();
+  const { setQuery, debouncedQuery } = useSearch();
   const { products, loading, refetch } = useProducts(initialProducts);
 
   useEffect(() => {

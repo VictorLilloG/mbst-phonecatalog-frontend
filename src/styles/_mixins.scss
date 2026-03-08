@@ -32,3 +32,8 @@ $breakpoint-xl: 1280px;
   padding-left: var(--page-padding-x);
   padding-right: var(--page-padding-x);
 }
+
+@mixin focus-outline {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
