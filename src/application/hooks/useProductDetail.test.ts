@@ -104,4 +104,14 @@ describe('useProductDetail', () => {
     const { result } = renderHook(() => useProductDetail(productWithoutImage));
     expect(result.current.currentImageUrl).toBe('http://example.com/red.webp');
   });
+
+  it('returns empty string when product has no imageUrl and no color options', () => {
+    const productWithNoImages = {
+      ...mockProduct,
+      imageUrl: undefined as unknown as string,
+      colorOptions: [],
+    };
+    const { result } = renderHook(() => useProductDetail(productWithNoImages));
+    expect(result.current.currentImageUrl).toBe('');
+  });
 });
