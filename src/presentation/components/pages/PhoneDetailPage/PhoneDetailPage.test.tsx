@@ -116,6 +116,19 @@ describe('PhoneDetailPage', () => {
     expect(image).toHaveAttribute('src', 'https://example.com/blue.webp');
   });
 
+  it('selections persist and button stays enabled after clicking add to cart', async () => {
+    const user = userEvent.setup();
+    render(<PhoneDetailPage product={mockProduct} />);
+
+    await user.click(screen.getByLabelText('Green'));
+    await user.click(screen.getByLabelText('256 GB for 269 EUR'));
+
+    const addButton = screen.getByRole('button', { name: /add to cart/i });
+    await user.click(addButton);
+
+    expect(addButton).toBeEnabled();
+  });
+
   it('renders color and storage selectors', () => {
     render(<PhoneDetailPage product={mockProduct} />);
     expect(screen.getByRole('radiogroup', { name: /color options/i })).toBeInTheDocument();

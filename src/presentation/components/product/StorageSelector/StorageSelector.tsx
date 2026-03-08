@@ -1,4 +1,5 @@
 import type { StorageOption } from '@/domain/models/Product';
+import { formatPrice } from '@/lib/utils';
 import styles from './StorageSelector.module.scss';
 
 interface StorageSelectorProps {
@@ -28,7 +29,7 @@ export function StorageSelector({
               type="button"
               role="radio"
               aria-checked={isSelected}
-              aria-label={`${option.capacity} for ${option.price} EUR`}
+              aria-label={`${option.capacity} for ${formatPrice(option.price)}`}
               className={`${styles.option} ${isSelected ? styles.selected : ''}`}
               onClick={() => onSelect(option)}
             >

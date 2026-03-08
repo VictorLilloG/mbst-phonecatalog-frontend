@@ -95,7 +95,7 @@ export function SimilarProducts({ products }: SimilarProductsProps) {
         <h2 className={styles.title}>SIMILAR ITEMS</h2>
       </div>
 
-      <div ref={sliderRef} className={styles.slider}>
+      <div ref={sliderRef} className={styles.slider} data-testid="similar-slider">
         <div className={styles.sliderSpacer} aria-hidden="true" />
         {products.map((product, index) => (
           <div key={`${product.id}-${index}`} className={styles.item} role="listitem">
