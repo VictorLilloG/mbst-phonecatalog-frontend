@@ -40,6 +40,7 @@
 
 .imageContainer {
   z-index: 1;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,10 +48,6 @@
 }
 
 .image {
-  width: auto;
-  height: auto;
-  max-width: 250px;
-  max-height: 200px;
   object-fit: contain;
 }
 

@@ -15,7 +15,7 @@ export function CartPage() {
   };
 
   return (
-    <>
+    <div>
       <Navbar fullWidthSubHeader hideCart>
         <div className={styles.divider} />
       </Navbar>
@@ -55,6 +55,6 @@ export function CartPage() {
           )}
         </div>
       </main>
-    </>
+    </div>
   );
 }

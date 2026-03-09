@@ -24,7 +24,7 @@ export function PhoneListPage({ initialProducts }: PhoneListPageProps) {
   }, [debouncedQuery, refetch]);
 
   return (
-    <>
+    <div>
       <Navbar>
         <SearchBar onSearch={setQuery} />
         <ResultsCount count={products.length} />
@@ -32,6 +32,6 @@ export function PhoneListPage({ initialProducts }: PhoneListPageProps) {
       <PageLayout>
         <ProductGrid products={products} loading={loading} />
       </PageLayout>
-    </>
+    </div>
   );
 }
