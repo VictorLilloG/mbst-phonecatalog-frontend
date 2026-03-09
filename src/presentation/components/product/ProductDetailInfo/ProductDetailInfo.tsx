@@ -38,10 +38,10 @@ export function ProductDetailInfo({
         <Image
             src={ensureHttps(currentImageUrl)}
             alt={`${product.brand} ${product.name}`}
-            width={500}
-            height={500}
+            fill
             className={styles.image}
             priority
+            sizes="(max-width: 768px) 275px, (max-width: 1200px) 415px, 500px"
           />
       </div>
 

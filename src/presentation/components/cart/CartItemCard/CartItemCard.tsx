@@ -15,9 +15,9 @@ export function CartItemCard({ item, onRemove }: CartItemCardProps) {
         <Image
           src={ensureHttps(item.imageUrl)}
           alt={`${item.brand} ${item.name}`}
-          width={300}
-          height={300}
+          fill
           className={styles.image}
+          sizes="(max-width: 1200px) 175px, 300px"
         />
       </div>
 

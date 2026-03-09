@@ -49,7 +49,7 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
   };
 
   return (
-    <>
+    <div>
       <Navbar>
         <Link href="/" className={styles.backLink}>
           <Image
@@ -82,6 +82,6 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
         />
         <SimilarProducts products={product.similarProducts} />
       </PageLayout>
-    </>
+    </div>
   );
 }

@@ -6,13 +6,14 @@ import styles from './ProductCard.module.scss';
 
 interface ProductCardProps {
   product: ProductSummary;
+  priority?: boolean;
 }
 
 /**
  * Individual phone card displaying image, brand, name, and price.
  * Clicking navigates to the product detail page.
  */
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <Link
       href={`/product/${product.id}`}
@@ -23,9 +24,10 @@ export function ProductCard({ product }: ProductCardProps) {
         <Image
           src={ensureHttps(product.imageUrl)}
           alt={`${product.brand} ${product.name}`}
-          width={200}
-          height={200}
+          fill
           className={styles.image}
+          sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 300px"
+          priority={priority}
         />
       </div>
       <div className={styles.info}>

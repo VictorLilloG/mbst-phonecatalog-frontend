@@ -18,10 +18,9 @@
 
 .imageContainer {
   flex-shrink: 0;
+  position: relative;
   width: 10.9375rem; // 175px
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 1;
 
   @include desktop {
     width: 18.75rem; // 300px
@@ -29,16 +28,7 @@
 }
 
 .image {
-  width: 100%;
-  height: auto;
-  max-width: 10.9375rem; // 175px
-  max-height: 10.9375rem; // 175px
   object-fit: contain;
-
-  @include desktop {
-    max-width: 18.75rem; // 300px
-    max-height: 18.75rem;
-  }
 }
 
 .info {
