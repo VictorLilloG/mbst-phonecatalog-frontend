@@ -1,17 +1,22 @@
 'use client';
 
-/**
- * Hook for cart operations.
- * Skeleton: to be implemented in the cart feature phase.
- */
+import { useMemo } from 'react';
+import { useCartContext } from '@/presentation/context/CartContext';
+
 export function useCart() {
+  const { items, totalCount, addItem, removeItem, clearCart } = useCartContext();
+
+  const totalPrice = useMemo(
+    () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [items],
+  );
+
   return {
-    items: [] as const,
-    totalCount: 0,
-    totalPrice: 0,
-    addItem: () => {},
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    removeItem: (_productId: string) => {},
-    clearCart: () => {},
+    items,
+    totalCount,
+    totalPrice,
+    addItem,
+    removeItem,
+    clearCart,
   };
 }

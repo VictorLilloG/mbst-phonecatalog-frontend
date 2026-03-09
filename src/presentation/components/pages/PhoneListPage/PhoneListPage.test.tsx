@@ -14,6 +14,16 @@ jest.mock('@/application/hooks/useProducts', () => ({
   }),
 }));
 
+jest.mock('@/presentation/context/CartContext', () => ({
+  useCartContext: () => ({
+    items: [],
+    totalCount: 0,
+    addItem: jest.fn(),
+    removeItem: jest.fn(),
+    clearCart: jest.fn(),
+  }),
+}));
+
 const initialProducts: ProductSummary[] = [
   {
     id: '1',
