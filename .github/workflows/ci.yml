@@ -31,7 +31,7 @@ jobs:
         run: npm run format:check
 
       - name: Run tests with coverage
-        run: npm test -- --coverage --ci
+        run: npm run test:ci
 
       - name: Upload coverage report
         if: always()
