@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { ProductApiRepository } from '@/infrastructure/api/ProductApiRepository';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog-frontend.vercel.app';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const productRepository = new ProductApiRepository();
