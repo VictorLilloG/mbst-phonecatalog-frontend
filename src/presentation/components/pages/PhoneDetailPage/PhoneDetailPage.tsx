@@ -52,13 +52,7 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
     <div>
       <Navbar>
         <Link href="/" className={styles.backLink}>
-          <Image
-            src="/back-icon.svg"
-            alt=""
-            width={20}
-            height={20}
-            aria-hidden="true"
-          />
+          <Image src="/back-icon.svg" alt="" width={20} height={20} aria-hidden="true" />
           <span>BACK</span>
         </Link>
       </Navbar>

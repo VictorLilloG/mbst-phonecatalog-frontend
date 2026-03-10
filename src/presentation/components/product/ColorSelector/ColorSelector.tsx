@@ -28,17 +28,12 @@ export function ColorSelector({ colors, selectedColor, onSelect }: ColorSelector
               className={`${styles.swatch} ${isSelected ? styles.selected : ''}`}
               onClick={() => onSelect(color)}
             >
-              <span
-                className={styles.color}
-                style={{ backgroundColor: color.hexCode }}
-              />
+              <span className={styles.color} style={{ backgroundColor: color.hexCode }} />
             </button>
           );
         })}
       </div>
-      <span className={styles.colorName}>
-        {selectedColor ? selectedColor.name : '\u00A0'}
-      </span>
+      <span className={styles.colorName}>{selectedColor ? selectedColor.name : '\u00A0'}</span>
     </fieldset>
   );
 }

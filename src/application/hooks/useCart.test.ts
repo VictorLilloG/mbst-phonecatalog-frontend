@@ -22,7 +22,10 @@ const makeItem = (overrides: Partial<CartItem> = {}): CartItem => ({
 describe('useCart', () => {
   it('computes totalPrice as sum of price * quantity for all items', () => {
     mockUseCartContext.mockReturnValue({
-      items: [makeItem({ price: 100, quantity: 2 }), makeItem({ productId: '2', price: 200, quantity: 1 })],
+      items: [
+        makeItem({ price: 100, quantity: 2 }),
+        makeItem({ productId: '2', price: 200, quantity: 1 }),
+      ],
       totalCount: 3,
       addItem: jest.fn(),
       removeItem: jest.fn(),

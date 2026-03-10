@@ -13,14 +13,30 @@ jest.mock('@/infrastructure/api/ProductApiRepository', () => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mockGetProducts: jest.Mock = (jest.requireMock('@/infrastructure/api/ProductApiRepository') as any)._mockGetProducts;
+const mockGetProducts: jest.Mock = (
+  jest.requireMock('@/infrastructure/api/ProductApiRepository') as {
+    _mockGetProducts: jest.Mock;
+  }
+)._mockGetProducts;
 
 const initialProducts: ProductSummary[] = [
-  { id: '1', brand: 'Apple', name: 'iPhone 15', basePrice: 999, imageUrl: 'http://example.com/iphone.webp' },
+  {
+    id: '1',
+    brand: 'Apple',
+    name: 'iPhone 15',
+    basePrice: 999,
+    imageUrl: 'http://example.com/iphone.webp',
+  },
 ];
 
 const freshProducts: ProductSummary[] = [
-  { id: '2', brand: 'Samsung', name: 'Galaxy S24', basePrice: 899, imageUrl: 'http://example.com/s24.webp' },
+  {
+    id: '2',
+    brand: 'Samsung',
+    name: 'Galaxy S24',
+    basePrice: 899,
+    imageUrl: 'http://example.com/s24.webp',
+  },
 ];
 
 beforeEach(() => {
@@ -96,9 +112,7 @@ describe('useProducts', () => {
       await result.current.refetch({ search: 'Samsung' });
     });
 
-    expect(mockGetProducts).toHaveBeenCalledWith(
-      expect.objectContaining({ search: 'Samsung' }),
-    );
+    expect(mockGetProducts).toHaveBeenCalledWith(expect.objectContaining({ search: 'Samsung' }));
   });
 
   it('always passes the default limit to repository', async () => {

@@ -33,10 +33,7 @@ export function CartProvider({ children }: CartProviderProps) {
     setItems(cartStorage.getItems());
   }, []);
 
-  const totalCount = useMemo(
-    () => items.reduce((sum, item) => sum + item.quantity, 0),
-    [items],
-  );
+  const totalCount = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items]);
 
   const addItem = useCallback((newItem: CartItem) => {
     setItems((prev) => {
@@ -50,9 +47,7 @@ export function CartProvider({ children }: CartProviderProps) {
       let updated: CartItem[];
       if (existingIndex >= 0) {
         updated = prev.map((item, index) =>
-          index === existingIndex
-            ? { ...item, quantity: item.quantity + newItem.quantity }
-            : item,
+          index === existingIndex ? { ...item, quantity: item.quantity + newItem.quantity } : item,
         );
       } else {
         updated = [...prev, newItem];

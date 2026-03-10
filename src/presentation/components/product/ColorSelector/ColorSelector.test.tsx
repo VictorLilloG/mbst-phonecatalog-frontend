@@ -53,7 +53,9 @@ describe('ColorSelector', () => {
   });
 
   it('shows a placeholder when no color is selected', () => {
-    const { container } = render(<ColorSelector colors={colors} selectedColor={null} onSelect={jest.fn()} />);
+    const { container } = render(
+      <ColorSelector colors={colors} selectedColor={null} onSelect={jest.fn()} />,
+    );
     const colorName = container.querySelector('[class*="colorName"]');
     expect(colorName).toBeInTheDocument();
     expect(colorName?.textContent).toBe('\u00A0');

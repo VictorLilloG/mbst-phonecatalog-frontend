@@ -7,8 +7,20 @@ jest.mock('./httpClient');
 const mockHttpClient = httpClient as jest.MockedFunction<typeof httpClient>;
 
 const mockProducts: ProductSummary[] = [
-  { id: '1', brand: 'Samsung', name: 'Galaxy S24', basePrice: 899, imageUrl: 'http://example.com/s24.webp' },
-  { id: '2', brand: 'Apple', name: 'iPhone 15', basePrice: 999, imageUrl: 'http://example.com/i15.webp' },
+  {
+    id: '1',
+    brand: 'Samsung',
+    name: 'Galaxy S24',
+    basePrice: 899,
+    imageUrl: 'http://example.com/s24.webp',
+  },
+  {
+    id: '2',
+    brand: 'Apple',
+    name: 'iPhone 15',
+    basePrice: 999,
+    imageUrl: 'http://example.com/i15.webp',
+  },
 ];
 
 const mockDetail: ProductDetail = {
