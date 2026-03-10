@@ -56,7 +56,7 @@ const defaultProps = {
 describe('ProductDetailInfo', () => {
   it('renders the product name in uppercase', () => {
     render(<ProductDetailInfo {...defaultProps} />);
-    expect(screen.getByText('TEST PHONE')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /test phone/i })).toBeInTheDocument();
   });
 
   it('renders the current price', () => {
