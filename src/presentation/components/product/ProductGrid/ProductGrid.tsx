@@ -27,7 +27,7 @@ export function ProductGrid({ products, loading = false }: ProductGridProps) {
       <div className={styles.grid} role="list" aria-label="Phone catalog">
         {products.map((product, index) => (
           <div key={`${product.id}-${index}`} role="listitem">
-            <ProductCard product={product} priority={index < 4} />
+            <ProductCard product={product} priority={index < 5} />
           </div>
         ))}
       </div>
