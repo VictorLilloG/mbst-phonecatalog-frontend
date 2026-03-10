@@ -45,7 +45,7 @@ const defaultProps = {
   product: mockProduct,
   selectedColor: null as ColorOption | null,
   selectedStorage: null as StorageOption | null,
-  currentImageUrl: mockProduct.imageUrl,
+  currentImageUrl: mockProduct.imageUrl ?? '',
   currentPrice: mockProduct.basePrice,
   canAddToCart: false,
   onSelectColor: jest.fn(),
