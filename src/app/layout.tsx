@@ -20,7 +20,7 @@ const SITE_DESCRIPTION =
   'Browse and shop the latest smartphones. Compare prices, specs, and colors from top brands.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  ...(SITE_URL && { metadataBase: new URL(SITE_URL) }),
   title: {
     default: SITE_NAME,
     template: '%s | MBST',

@@ -57,6 +57,24 @@ pnpm start
 
 ---
 
+## Deployment
+
+The application is deployed on **Vercel** and updates automatically on every push to the `main` branch via a GitHub integration.
+
+**Live URL:** [https://mbst-phonecatalog-frontend.vercel.app](https://mbst-phonecatalog-frontend.vercel.app)
+
+### Vercel Environment Variables
+
+Set the following variables in your Vercel project dashboard (Settings → Environment Variables):
+
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the phones API |
+| `NEXT_PUBLIC_API_KEY` | API authentication key (`x-api-key`) |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the deployed site (used for SEO metadata) |
+
+---
+
 ## Available Scripts
 
 | Script | Description |
