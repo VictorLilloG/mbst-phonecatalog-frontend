@@ -14,7 +14,8 @@ const helveticaNeue = localFont({
   display: 'swap',
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog-frontend.vercel.app';
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog-frontend.vercel.app';
 const SITE_NAME = 'MBST Phone Catalog';
 const SITE_DESCRIPTION =
   'Browse and shop the latest smartphones. Compare prices, specs, and colors from top brands.';
