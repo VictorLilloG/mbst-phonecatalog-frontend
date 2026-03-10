@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { PhoneDetailPage } from './PhoneDetailPage';
 import type { ProductDetail } from '@/domain/models/Product';
@@ -101,7 +101,8 @@ describe('PhoneDetailPage', () => {
 
   it('renders the product brand in specifications', () => {
     render(<PhoneDetailPage product={mockProduct} />);
-    expect(screen.getByText('OPPO')).toBeInTheDocument();
+    const specsSection = screen.getByRole('region', { name: /specifications/i });
+    expect(within(specsSection).getByText('OPPO')).toBeInTheDocument();
   });
 
   it('renders the product name in uppercase', () => {
