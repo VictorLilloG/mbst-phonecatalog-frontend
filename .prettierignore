@@ -1,3 +1,17 @@
-.next
-node_modules
-coverage
+# Build output
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Test coverage
+coverage/
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Agent skills (external, managed by Copilot — not project code)
+.agents/
