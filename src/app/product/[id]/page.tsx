@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ProductApiRepository } from '@/infrastructure/api/ProductApiRepository';
 import { PhoneDetailPage } from '@/presentation/components/pages/PhoneDetailPage/PhoneDetailPage';
+import { ensureHttps } from '@/lib/utils';
 import type { ProductDetail } from '@/domain/models/Product';
 
 interface ProductPageProps {
@@ -10,7 +11,13 @@ interface ProductPageProps {
 
 const productRepository = new ProductApiRepository();
 
+function getProductOgImage(product: ProductDetail): string {
+  const raw = product.imageUrl ?? product.colorOptions[0]?.imageUrl;
+  return ensureHttps(raw);
+}
+
 function getProductJsonLd(product: ProductDetail) {
+  const imageUrl = getProductOgImage(product);
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -20,7 +27,7 @@ function getProductJsonLd(product: ProductDetail) {
       '@type': 'Brand',
       name: product.brand,
     },
-    ...(product.imageUrl && { image: product.imageUrl }),
+    ...(imageUrl && { image: imageUrl }),
     ...(product.rating && {
       aggregateRating: {
         '@type': 'AggregateRating',
@@ -48,6 +55,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       product.description ||
       `Buy ${product.brand} ${product.name} from ${priceFrom} EUR. Check specs, colors, and storage options.`;
 
+    const ogImage = getProductOgImage(product);
     return {
       title,
       description,
@@ -56,10 +64,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         description,
         url: `/product/${id}`,
         type: 'website',
-        ...(product.imageUrl && {
+        ...(ogImage && {
           images: [
             {
-              url: product.imageUrl,
+              url: ogImage,
+              width: 800,
+              height: 800,
               alt: `${product.brand} ${product.name}`,
             },
           ],
@@ -69,7 +79,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         card: 'summary_large_image',
         title: `${title} | MBST`,
         description,
-        ...(product.imageUrl && { images: [product.imageUrl] }),
+        ...(ogImage && { images: [ogImage] }),
       },
       alternates: {
         canonical: `/product/${id}`,
