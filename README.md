@@ -6,15 +6,15 @@ A mobile phone catalog SPA for browsing, searching, and purchasing smartphones. 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 14 (App Router) — SSR + CSR |
-| Language | TypeScript 5 |
-| Styling | SASS Modules + CSS Custom Properties |
-| State Management | React Context API + localStorage |
-| Testing | Jest 30 + React Testing Library |
-| Linting / Formatting | ESLint (jsx-a11y) + Prettier |
-| Runtime | Node.js >= 18 |
+| Layer                | Technology                           |
+| -------------------- | ------------------------------------ |
+| Framework            | Next.js 14 (App Router) — SSR + CSR  |
+| Language             | TypeScript 5                         |
+| Styling              | SASS Modules + CSS Custom Properties |
+| State Management     | React Context API + localStorage     |
+| Testing              | Jest 30 + React Testing Library      |
+| Linting / Formatting | ESLint (jsx-a11y) + Prettier         |
+| Runtime              | Node.js >= 18                        |
 
 ---
 
@@ -67,27 +67,27 @@ The application is deployed on **Vercel** and updates automatically on every pus
 
 Set the following variables in your Vercel project dashboard (Settings → Environment Variables):
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the phones API |
-| `NEXT_PUBLIC_API_KEY` | API authentication key (`x-api-key`) |
-| `NEXT_PUBLIC_SITE_URL` | Public URL of the deployed site (used for SEO metadata) |
+| Variable                   | Description                                             |
+| -------------------------- | ------------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the phones API                              |
+| `NEXT_PUBLIC_API_KEY`      | API authentication key (`x-api-key`)                    |
+| `NEXT_PUBLIC_SITE_URL`     | Public URL of the deployed site (used for SEO metadata) |
 
 ---
 
 ## Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Create optimised production build |
-| `pnpm start` | Serve the production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm lint:fix` | Run ESLint with auto-fix |
-| `pnpm format` | Format source files with Prettier |
-| `pnpm format:check` | Check formatting without writing |
-| `pnpm test` | Run the full test suite |
-| `pnpm test:watch` | Run tests in watch mode |
+| Script               | Description                            |
+| -------------------- | -------------------------------------- |
+| `pnpm dev`           | Start development server               |
+| `pnpm build`         | Create optimised production build      |
+| `pnpm start`         | Serve the production build             |
+| `pnpm lint`          | Run ESLint                             |
+| `pnpm lint:fix`      | Run ESLint with auto-fix               |
+| `pnpm format`        | Format source files with Prettier      |
+| `pnpm format:check`  | Check formatting without writing       |
+| `pnpm test`          | Run the full test suite                |
+| `pnpm test:watch`    | Run tests in watch mode                |
 | `pnpm test:coverage` | Run tests and generate coverage report |
 
 ---
@@ -142,11 +142,11 @@ All HTTP calls are centralised in `src/infrastructure/api/`. The `x-api-key` hea
 
 ## Views
 
-| Route | Description |
-|-------|-------------|
-| `/` | Phone list — responsive grid, real-time search, results count |
+| Route           | Description                                                         |
+| --------------- | ------------------------------------------------------------------- |
+| `/`             | Phone list — responsive grid, real-time search, results count       |
 | `/product/[id]` | Phone detail — colour/storage selectors, dynamic price, add to cart |
-| `/cart` | Shopping cart — item list, total price, per-item delete |
+| `/cart`         | Shopping cart — item list, total price, per-item delete             |
 
 ---
 

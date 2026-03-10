@@ -1,17 +1,15 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript",
-    "plugin:jsx-a11y/recommended",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "next/typescript", "plugin:jsx-a11y/recommended", "prettier"],
   "plugins": ["jsx-a11y"],
   "rules": {
     "no-console": "warn",
-    "@typescript-eslint/no-unused-vars": ["error", {
-      "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_",
-      "destructuredArrayIgnorePattern": "^_"
-    }]
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ]
   }
 }
