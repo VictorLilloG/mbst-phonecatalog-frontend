@@ -30,6 +30,7 @@ export function PhoneListPage({ initialProducts }: PhoneListPageProps) {
         <ResultsCount count={products.length} />
       </Navbar>
       <PageLayout>
+        <h1 className="sr-only">Explore the Latest Smartphones</h1>
         <ProductGrid products={products} loading={loading} />
       </PageLayout>
     </div>

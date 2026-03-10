@@ -14,13 +14,14 @@ const helveticaNeue = localFont({
   display: 'swap',
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog.com';
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog-frontend.vercel.app';
 const SITE_NAME = 'MBST Phone Catalog';
 const SITE_DESCRIPTION =
   'Browse and shop the latest smartphones. Compare prices, specs, and colors from top brands.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  ...(SITE_URL && { metadataBase: new URL(SITE_URL) }),
   title: {
     default: SITE_NAME,
     template: '%s | MBST',
@@ -43,11 +44,20 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: '/web-example.png',
+        width: 1104,
+        height: 908,
+        alt: 'MBST Phone Catalog',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: ['/web-example.png'],
   },
   robots: {
     index: true,

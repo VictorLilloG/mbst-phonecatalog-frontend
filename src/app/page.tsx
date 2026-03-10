@@ -12,6 +12,18 @@ export const metadata: Metadata = {
     description:
       'Browse our catalog of the latest smartphones. Compare specs, prices, and colors from top brands.',
     url: '/',
+    images: [
+      {
+        url: '/web-example.png',
+        width: 1104,
+        height: 908,
+        alt: 'MBST Phone Catalog — browse the latest smartphones',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/web-example.png'],
   },
   alternates: {
     canonical: '/',
