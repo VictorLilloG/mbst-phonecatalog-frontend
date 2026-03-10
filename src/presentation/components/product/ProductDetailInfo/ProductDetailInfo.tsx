@@ -36,19 +36,22 @@ export function ProductDetailInfo({
     <section className={styles.container} aria-label="Product details">
       <div className={styles.imageSection}>
         <Image
-            src={ensureHttps(currentImageUrl)}
-            alt={`${product.brand} ${product.name}`}
-            width={500}
-            height={500}
-            className={styles.image}
-            priority
-          />
+          src={ensureHttps(currentImageUrl)}
+          alt={`${product.brand} ${product.name}`}
+          fill
+          className={styles.image}
+          priority
+          sizes="(max-width: 768px) 275px, (max-width: 1200px) 415px, 500px"
+        />
       </div>
 
       <div className={styles.infoSection}>
         <div className={styles.header}>
           <h1 className={styles.name}>{product.name.toUpperCase()}</h1>
-          <span className={styles.price}>From {formatPrice(currentPrice)}</span>
+          <span className={styles.price}>
+            {selectedStorage ? '' : 'From '}
+            {formatPrice(currentPrice)}
+          </span>
         </div>
 
         <div className={styles.selectors}>

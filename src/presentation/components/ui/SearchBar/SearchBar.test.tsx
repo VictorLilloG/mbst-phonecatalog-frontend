@@ -6,16 +6,12 @@ describe('SearchBar', () => {
   describe('rendering', () => {
     it('renders the search input with placeholder text', () => {
       render(<SearchBar />);
-      expect(
-        screen.getByPlaceholderText('Search for a smartphone...'),
-      ).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('Search for a smartphone...')).toBeInTheDocument();
     });
 
     it('has an accessible label for the input', () => {
       render(<SearchBar />);
-      expect(
-        screen.getByLabelText('Search for a smartphone'),
-      ).toBeInTheDocument();
+      expect(screen.getByLabelText('Search for a smartphone')).toBeInTheDocument();
     });
 
     it('has the searchbox role', () => {
@@ -25,9 +21,7 @@ describe('SearchBar', () => {
 
     it('does not render clear button when input is empty', () => {
       render(<SearchBar />);
-      expect(
-        screen.queryByRole('button', { name: /clear search/i }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /clear search/i })).not.toBeInTheDocument();
     });
   });
 
@@ -62,9 +56,7 @@ describe('SearchBar', () => {
 
       await user.type(screen.getByRole('searchbox'), 'iPhone');
 
-      expect(
-        screen.getByRole('button', { name: /clear search/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /clear search/i })).toBeInTheDocument();
     });
 
     it('clears the input value when clicked', async () => {
@@ -73,9 +65,7 @@ describe('SearchBar', () => {
 
       const input = screen.getByRole('searchbox');
       await user.type(input, 'iPhone');
-      await user.click(
-        screen.getByRole('button', { name: /clear search/i }),
-      );
+      await user.click(screen.getByRole('button', { name: /clear search/i }));
 
       expect(input).toHaveValue('');
     });
@@ -86,9 +76,7 @@ describe('SearchBar', () => {
       render(<SearchBar onSearch={onSearch} />);
 
       await user.type(screen.getByRole('searchbox'), 'test');
-      await user.click(
-        screen.getByRole('button', { name: /clear search/i }),
-      );
+      await user.click(screen.getByRole('button', { name: /clear search/i }));
 
       expect(onSearch).toHaveBeenLastCalledWith('');
     });
@@ -99,9 +87,7 @@ describe('SearchBar', () => {
 
       const input = screen.getByRole('searchbox');
       await user.type(input, 'test');
-      await user.click(
-        screen.getByRole('button', { name: /clear search/i }),
-      );
+      await user.click(screen.getByRole('button', { name: /clear search/i }));
 
       expect(input).toHaveFocus();
     });
@@ -111,13 +97,9 @@ describe('SearchBar', () => {
       render(<SearchBar />);
 
       await user.type(screen.getByRole('searchbox'), 'x');
-      await user.click(
-        screen.getByRole('button', { name: /clear search/i }),
-      );
+      await user.click(screen.getByRole('button', { name: /clear search/i }));
 
-      expect(
-        screen.queryByRole('button', { name: /clear search/i }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /clear search/i })).not.toBeInTheDocument();
     });
   });
 
@@ -126,9 +108,7 @@ describe('SearchBar', () => {
       const user = userEvent.setup();
       render(<SearchBar />);
 
-      await expect(
-        user.type(screen.getByRole('searchbox'), 'test'),
-      ).resolves.not.toThrow();
+      await expect(user.type(screen.getByRole('searchbox'), 'test')).resolves.not.toThrow();
     });
 
     it('does not throw when clearing without onSearch', async () => {

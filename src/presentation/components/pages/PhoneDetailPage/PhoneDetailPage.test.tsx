@@ -2,13 +2,15 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { PhoneDetailPage } from './PhoneDetailPage';
 import type { ProductDetail } from '@/domain/models/Product';
+import { useCart } from '@/application/hooks/useCart';
+import { useCartContext } from '@/presentation/context/CartContext';
 
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ priority, ...props }: any) => {
+  default: ({ fill: _fill, priority: _priority, ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-priority={priority} {...props} />;
+    return <img {...props} />;
   },
 }));
 
@@ -27,6 +29,13 @@ jest.mock('next/link', () => ({
     </a>
   ),
 }));
+
+jest.mock('@/application/hooks/useCart');
+jest.mock('@/presentation/context/CartContext');
+
+const mockAddItem = jest.fn();
+const mockUseCart = useCart as jest.MockedFunction<typeof useCart>;
+const mockUseCartContext = useCartContext as jest.MockedFunction<typeof useCartContext>;
 
 const mockProduct: ProductDetail = {
   id: 'OPP-R11F',
@@ -50,15 +59,39 @@ const mockProduct: ProductDetail = {
     { name: 'Green', hexCode: '#008000', imageUrl: 'http://example.com/green.webp' },
     { name: 'Blue', hexCode: '#0000FF', imageUrl: 'http://example.com/blue.webp' },
   ],
-  storageOptions: [
-    { capacity: '256 GB', price: 269 },
-  ],
+  storageOptions: [{ capacity: '256 GB', price: 269 }],
   similarProducts: [
-    { id: 'SMG-S23FE', brand: 'Samsung', name: 'Galaxy S23 FE', basePrice: 699, imageUrl: 'http://example.com/s23.webp' },
+    {
+      id: 'SMG-S23FE',
+      brand: 'Samsung',
+      name: 'Galaxy S23 FE',
+      basePrice: 699,
+      imageUrl: 'http://example.com/s23.webp',
+    },
   ],
 };
 
 describe('PhoneDetailPage', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockAddItem.mockClear();
+    mockUseCart.mockReturnValue({
+      items: [],
+      totalCount: 0,
+      totalPrice: 0,
+      addItem: mockAddItem,
+      removeItem: jest.fn(),
+      clearCart: jest.fn(),
+    });
+    mockUseCartContext.mockReturnValue({
+      items: [],
+      totalCount: 0,
+      addItem: jest.fn(),
+      removeItem: jest.fn(),
+      clearCart: jest.fn(),
+    });
+  });
+
   it('renders the back link to home', () => {
     render(<PhoneDetailPage product={mockProduct} />);
     const links = screen.getAllByRole('link');
@@ -133,5 +166,25 @@ describe('PhoneDetailPage', () => {
     render(<PhoneDetailPage product={mockProduct} />);
     expect(screen.getByRole('radiogroup', { name: /color options/i })).toBeInTheDocument();
     expect(screen.getByRole('radiogroup', { name: /storage options/i })).toBeInTheDocument();
+  });
+
+  it('calls addItem with correct CartItem when add to cart is clicked', async () => {
+    const user = userEvent.setup();
+    render(<PhoneDetailPage product={mockProduct} />);
+
+    await user.click(screen.getByLabelText('Green'));
+    await user.click(screen.getByLabelText('256 GB for 269 EUR'));
+    await user.click(screen.getByRole('button', { name: /add to cart/i }));
+
+    expect(mockAddItem).toHaveBeenCalledWith({
+      productId: 'OPP-R11F',
+      name: 'Reno 11 F',
+      brand: 'OPPO',
+      imageUrl: 'http://example.com/green.webp',
+      selectedColor: 'Green',
+      selectedStorage: '256 GB',
+      price: 269,
+      quantity: 1,
+    });
   });
 });

@@ -14,9 +14,52 @@ const helveticaNeue = localFont({
   display: 'swap',
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mbst-phonecatalog.com';
+const SITE_NAME = 'MBST Phone Catalog';
+const SITE_DESCRIPTION =
+  'Browse and shop the latest smartphones. Compare prices, specs, and colors from top brands.';
+
 export const metadata: Metadata = {
-  title: 'MBST - Phone Catalog',
-  description: 'Browse and shop the latest smartphones',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: '%s | MBST',
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    'smartphones',
+    'mobile phones',
+    'phone catalog',
+    'buy phones',
+    'phone specs',
+    'phone comparison',
+  ],
+  authors: [{ name: 'MBST' }],
+  creator: 'MBST',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -27,9 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={helveticaNeue.variable}>
       <body>
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );

@@ -48,13 +48,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
           onClick={handleClear}
           aria-label="Clear search"
         >
-          <Image
-            src="/close-icon.svg"
-            alt=""
-            width={7.5}
-            height={7.5}
-            aria-hidden="true"
-          />
+          <Image src="/close-icon.svg" alt="" width={7.5} height={7.5} aria-hidden="true" />
         </button>
       )}
     </div>

@@ -1,0 +1,88 @@
+@use '@/styles/mixins' as *;
+
+.cartItem {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) 0;
+  border-bottom: var(--border-width) solid var(--color-gray-300);
+
+  @include desktop {
+    gap: 2.5rem; // 40px
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.imageContainer {
+  flex-shrink: 0;
+  position: relative;
+  width: 10.9375rem; // 175px
+  aspect-ratio: 1;
+
+  @include desktop {
+    width: 18.75rem; // 300px
+  }
+}
+
+.image {
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 10.9375rem - var(--spacing-md));
+
+  @include desktop {
+    max-width: 18.75rem; // 300px
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.variant {
+  margin-top: var(--spacing-xs); // 4px
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.price {
+  margin-top: var(--spacing-2md); // 20px
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.removeButton {
+  margin-top: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  color: var(--color-remove);
+  text-align: left;
+  width: fit-content;
+
+  &:focus-visible {
+    @include focus-outline;
+  }
+}

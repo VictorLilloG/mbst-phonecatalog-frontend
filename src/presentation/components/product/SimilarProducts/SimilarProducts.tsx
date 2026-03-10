@@ -107,10 +107,7 @@ export function SimilarProducts({ products }: SimilarProductsProps) {
 
       <div className={styles.contentWrapper}>
         <div className={styles.scrollBarTrack} aria-hidden="true">
-          <div
-            className={styles.scrollBarThumb}
-            style={{ left: `${scrollProgress * 70}%` }}
-          />
+          <div className={styles.scrollBarThumb} style={{ left: `${scrollProgress * 70}%` }} />
         </div>
       </div>
     </section>

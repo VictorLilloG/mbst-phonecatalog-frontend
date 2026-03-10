@@ -5,9 +5,9 @@ import type { ProductSummary } from '@/domain/models/Product';
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ priority, ...props }: any) => {
+  default: ({ fill: _fill, priority: _priority, ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-priority={priority} {...props} />;
+    return <img {...props} />;
   },
 }));
 
@@ -28,8 +28,20 @@ jest.mock('next/link', () => ({
 }));
 
 const mockProducts: ProductSummary[] = [
-  { id: '1', brand: 'Apple', name: 'iPhone 15', basePrice: 999, imageUrl: 'http://example.com/iphone.webp' },
-  { id: '2', brand: 'Samsung', name: 'Galaxy S24', basePrice: 899, imageUrl: 'http://example.com/s24.webp' },
+  {
+    id: '1',
+    brand: 'Apple',
+    name: 'iPhone 15',
+    basePrice: 999,
+    imageUrl: 'http://example.com/iphone.webp',
+  },
+  {
+    id: '2',
+    brand: 'Samsung',
+    name: 'Galaxy S24',
+    basePrice: 899,
+    imageUrl: 'http://example.com/s24.webp',
+  },
 ];
 
 describe('ProductGrid', () => {

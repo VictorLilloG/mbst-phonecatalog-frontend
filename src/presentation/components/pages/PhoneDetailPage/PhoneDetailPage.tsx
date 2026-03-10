@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ProductDetail } from '@/domain/models/Product';
 import { useProductDetail } from '@/application/hooks/useProductDetail';
+import { useCart } from '@/application/hooks/useCart';
 import { Navbar } from '@/presentation/components/layout/Navbar/Navbar';
 import { PageLayout } from '@/presentation/components/layout/PageLayout/PageLayout';
 import { ProductDetailInfo } from '@/presentation/components/product/ProductDetailInfo/ProductDetailInfo';
@@ -30,21 +31,28 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
     selectStorage,
   } = useProductDetail(product);
 
+  const { addItem } = useCart();
+
   const handleAddToCart = () => {
-    // TODO: integrate with CartContext when implemented
+    if (!selectedColor || !selectedStorage) return;
+
+    addItem({
+      productId: product.id,
+      name: product.name,
+      brand: product.brand,
+      imageUrl: selectedColor.imageUrl,
+      selectedColor: selectedColor.name,
+      selectedStorage: selectedStorage.capacity,
+      price: selectedStorage.price,
+      quantity: 1,
+    });
   };
 
   return (
-    <>
+    <div>
       <Navbar>
         <Link href="/" className={styles.backLink}>
-          <Image
-            src="/back-icon.svg"
-            alt=""
-            width={20}
-            height={20}
-            aria-hidden="true"
-          />
+          <Image src="/back-icon.svg" alt="" width={20} height={20} aria-hidden="true" />
           <span>BACK</span>
         </Link>
       </Navbar>
@@ -68,6 +76,6 @@ export function PhoneDetailPage({ product }: PhoneDetailPageProps) {
         />
         <SimilarProducts products={product.similarProducts} />
       </PageLayout>
-    </>
+    </div>
   );
 }

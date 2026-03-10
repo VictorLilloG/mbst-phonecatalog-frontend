@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ProductApiRepository } from '@/infrastructure/api/ProductApiRepository';
 import { PhoneDetailPage } from '@/presentation/components/pages/PhoneDetailPage/PhoneDetailPage';
+import { ensureHttps } from '@/lib/utils';
+import type { ProductDetail } from '@/domain/models/Product';
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -9,16 +11,82 @@ interface ProductPageProps {
 
 const productRepository = new ProductApiRepository();
 
+function getProductOgImage(product: ProductDetail): string {
+  const raw = product.imageUrl ?? product.colorOptions[0]?.imageUrl;
+  return ensureHttps(raw);
+}
+
+function getProductJsonLd(product: ProductDetail) {
+  const imageUrl = getProductOgImage(product);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${product.brand} ${product.name}`,
+    description: product.description,
+    brand: {
+      '@type': 'Brand',
+      name: product.brand,
+    },
+    ...(imageUrl && { image: imageUrl }),
+    ...(product.rating && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+      },
+    }),
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'EUR',
+      lowPrice: Math.min(...product.storageOptions.map((s) => s.price)),
+      highPrice: Math.max(...product.storageOptions.map((s) => s.price)),
+      offerCount: product.storageOptions.length,
+    },
+  };
+}
+
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { id } = await params;
   try {
     const product = await productRepository.getProductById(id);
+    const title = `${product.brand} ${product.name}`;
+    const priceFrom = Math.min(...product.storageOptions.map((s) => s.price));
+    const description =
+      product.description ||
+      `Buy ${product.brand} ${product.name} from ${priceFrom} EUR. Check specs, colors, and storage options.`;
+
+    const ogImage = getProductOgImage(product);
     return {
-      title: `${product.brand} ${product.name} - MBST`,
-      description: product.description,
+      title,
+      description,
+      openGraph: {
+        title: `${title} | MBST`,
+        description,
+        url: `/product/${id}`,
+        type: 'website',
+        ...(ogImage && {
+          images: [
+            {
+              url: ogImage,
+              width: 800,
+              height: 800,
+              alt: `${product.brand} ${product.name}`,
+            },
+          ],
+        }),
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${title} | MBST`,
+        description,
+        ...(ogImage && { images: [ogImage] }),
+      },
+      alternates: {
+        canonical: `/product/${id}`,
+      },
     };
   } catch {
-    return { title: 'Product not found - MBST' };
+    return { title: 'Product not found', robots: { index: false } };
   }
 }
 
@@ -29,12 +97,20 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
 
-  let product;
+  let product: ProductDetail;
   try {
     product = await productRepository.getProductById(id);
   } catch {
     notFound();
   }
 
-  return <PhoneDetailPage product={product} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getProductJsonLd(product)) }}
+      />
+      <PhoneDetailPage product={product} />
+    </>
+  );
 }
