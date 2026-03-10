@@ -28,8 +28,20 @@ jest.mock('next/link', () => ({
 }));
 
 const mockProducts: ProductSummary[] = [
-  { id: '1', brand: 'Apple', name: 'iPhone 15', basePrice: 999, imageUrl: 'http://example.com/iphone.webp' },
-  { id: '2', brand: 'Samsung', name: 'Galaxy S24', basePrice: 899, imageUrl: 'http://example.com/s24.webp' },
+  {
+    id: '1',
+    brand: 'Apple',
+    name: 'iPhone 15',
+    basePrice: 999,
+    imageUrl: 'http://example.com/iphone.webp',
+  },
+  {
+    id: '2',
+    brand: 'Samsung',
+    name: 'Galaxy S24',
+    basePrice: 899,
+    imageUrl: 'http://example.com/s24.webp',
+  },
 ];
 
 describe('ProductGrid', () => {

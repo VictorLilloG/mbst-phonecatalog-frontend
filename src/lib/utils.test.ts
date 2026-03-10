@@ -40,6 +40,6 @@ describe('formatPrice', () => {
   });
 
   it('handles prices that are .00 as integers (no decimal shown)', () => {
-    expect(formatPrice(500.00)).toBe('500 EUR');
+    expect(formatPrice(500.0)).toBe('500 EUR');
   });
 });

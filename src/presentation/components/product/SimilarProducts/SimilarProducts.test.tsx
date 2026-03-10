@@ -28,8 +28,20 @@ jest.mock('next/link', () => ({
 }));
 
 const similarProducts: ProductSummary[] = [
-  { id: 'P1', brand: 'Samsung', name: 'Galaxy S23', basePrice: 699, imageUrl: 'http://example.com/s23.webp' },
-  { id: 'P2', brand: 'Apple', name: 'iPhone 14', basePrice: 799, imageUrl: 'http://example.com/i14.webp' },
+  {
+    id: 'P1',
+    brand: 'Samsung',
+    name: 'Galaxy S23',
+    basePrice: 699,
+    imageUrl: 'http://example.com/s23.webp',
+  },
+  {
+    id: 'P2',
+    brand: 'Apple',
+    name: 'iPhone 14',
+    basePrice: 799,
+    imageUrl: 'http://example.com/i14.webp',
+  },
 ];
 
 describe('SimilarProducts', () => {

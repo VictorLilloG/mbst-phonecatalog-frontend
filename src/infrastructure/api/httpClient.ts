@@ -9,10 +9,7 @@ interface RequestOptions {
  * HTTP client with automatic x-api-key header injection.
  * Single Responsibility: authenticated HTTP requests to the API.
  */
-export async function httpClient<T>(
-  endpoint: string,
-  options: RequestOptions = {},
-): Promise<T> {
+export async function httpClient<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { params, next: nextOptions } = options;
 
   const url = new URL(`${API_BASE_URL}${endpoint}`);

@@ -70,9 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={helveticaNeue.variable}>
       <body>
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
