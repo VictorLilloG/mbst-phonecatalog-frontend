@@ -6,9 +6,9 @@ import type { ProductDetail, ColorOption, StorageOption } from '@/domain/models/
 jest.mock('next/image', () => ({
   __esModule: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  default: ({ priority, ...props }: any) => {
+  default: ({ fill, priority, ...props }: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img data-priority={priority} {...props} />;
+    return <img {...props} />;
   },
 }));
 
